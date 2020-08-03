@@ -11,6 +11,10 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'songbook'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb+srv://Lingvistik:'+str(db_pass)+'@prviklaster-v3qci.mongodb.net/songbook?retryWrites=true&w=majority')
 
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
+            debug=True)
 
 mongo = PyMongo(app)
 
