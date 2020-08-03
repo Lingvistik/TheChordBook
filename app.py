@@ -18,9 +18,7 @@ if __name__ == '__main__':
             port=int(os.environ.get('PORT')),
             debug=True)
 
-@app.route('/')
-def route():
-    return redirect(url_for('get_chords'))
+
 
 @app.route('/get_chords')
 def get_chords():
