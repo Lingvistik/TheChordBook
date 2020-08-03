@@ -13,14 +13,14 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb+srv://Lingvistik:'+str
 
 mongo = PyMongo(app)
 
-@app.route('/')
-def route():
-    return redirect(url_for('get_chords'))
-
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+
+@app.route('/')
+def route():
+    return redirect(url_for('get_chords'))
 
 @app.route('/get_chords')
 def get_chords():
