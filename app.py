@@ -21,6 +21,11 @@ def route():
 def get_chords():
     return render_template('chordbook.html', chords=mongo.db.chords.find())
 
+@app.route('/show_chords/<chord_id>')
+def show_chords(chord_id):
+    the_chord = mongo.db.chords.find_one({"_id": ObjectId(chord_id)})
+    return render_template('showchords.html', chords=the_chord)
+
 @app.route('/add_chords')
 def add_chords():
     return render_template('addchords.html', genre=mongo.db.genre.find())
@@ -34,6 +39,11 @@ def insert_chords():
     chords = mongo.db.chords
     chords.insert_one(request.form.to_dict())
     return redirect(url_for('get_chords')) 
+
+@app.route('/delete_chords/<chord_id>')
+def delete_chords(chord_id):
+    mongo.db.chords.remove({'_id': ObjectId(chord_id)})
+    return redirect(url_for('get_chords'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
