@@ -9,7 +9,7 @@ db_pass = os.environ.get('DB_PASS')
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'songbook'
-app.config["MONGO_URI"] = 'mongodb+srv://Lingvistik:3rdProjectDB@prviklaster-v3qci.mongodb.net/songbook?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb+srv://Lingvistik:'+str(db_pass)+'@prviklaster-v3qci.mongodb.net/songbook?retryWrites=true&w=majority')
 
 mongo = PyMongo(app)
 
